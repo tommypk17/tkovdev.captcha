@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tkovdev.captcha.component", "tkovdev.captcha.component\tkovdev.captcha.component.csproj", "{958A0C3C-91A1-44DC-BD4B-A9A9442E22A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tkovdev.captcha.api", "tkovdev.captcha.api\tkovdev.captcha.api.csproj", "{7BF415CA-DC6D-4016-B706-0141BB8CE1A5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{958A0C3C-91A1-44DC-BD4B-A9A9442E22A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{958A0C3C-91A1-44DC-BD4B-A9A9442E22A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{958A0C3C-91A1-44DC-BD4B-A9A9442E22A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{958A0C3C-91A1-44DC-BD4B-A9A9442E22A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BF415CA-DC6D-4016-B706-0141BB8CE1A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BF415CA-DC6D-4016-B706-0141BB8CE1A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BF415CA-DC6D-4016-B706-0141BB8CE1A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BF415CA-DC6D-4016-B706-0141BB8CE1A5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
