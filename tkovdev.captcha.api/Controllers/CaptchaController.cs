@@ -28,6 +28,7 @@ namespace WebApplication.Controllers
         {
             ICaptcha x = new Captcha(_configuration.GetValue<string>("Captcha:Salt"));
             Response.Headers.Add("X-Captcha-Encoded", x.EncodedSecret);
+            Response.Headers.Add("X-Captcha-TimeStamp", x.TimeStamp.ToString("O"));
             return File( x.Image, "image/jpeg");
         }
         
@@ -41,7 +42,8 @@ namespace WebApplication.Controllers
                 {
                     Salt = _configuration.GetValue<string>("Captcha:Salt"),
                     Secret = captchaRequest.Secret,
-                    EncodedSecret = captchaRequest.EncodedSecret
+                    EncodedSecret = captchaRequest.EncodedSecret,
+                    TimeStamp = captchaRequest.TimeStamp
                 };
 
                 CaptchaResponse res =

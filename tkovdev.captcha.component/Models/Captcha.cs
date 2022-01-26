@@ -17,12 +17,15 @@ namespace tkovdev.captcha.component.Models
         public string EncodedSecret { get; set; } = null;
         public byte[] Image { get; set; }
         public string Salt { get; set; }
+        public DateTime TimeStamp { get; set; }
+
 
         public Captcha(){}
-        public Captcha(string salt)
+        public Captcha(string salt, int length = 6, int timeout = 20)
         {
             Salt = salt;
-            Secret = CreateSecret(6);
+            TimeStamp = DateTime.Now.AddMinutes(timeout);
+            Secret = CreateSecret(length);
             EncodedSecret = EncodeSecret();
             Image = CreateImage();
         }
@@ -38,9 +41,10 @@ namespace tkovdev.captcha.component.Models
         {
             if (Salt == null || Salt.Trim() == "") throw new NullReferenceException("Captcha.Salt cannot be null.");
             if (Secret == null || Secret.Trim() == "") throw new NullReferenceException("Captcha.Secret cannot be null.");
+            if (TimeStamp == default) throw new NullReferenceException("Captcha.TimeStamp must be set.");
             
             SHA256CryptoServiceProvider hasher = new SHA256CryptoServiceProvider();
-            byte[] textWithSaltBytes = Encoding.UTF8.GetBytes(string.Concat(Secret, Salt));
+            byte[] textWithSaltBytes = Encoding.UTF8.GetBytes(string.Concat(Secret, Salt, TimeStamp.ToString("O")));
             byte[] hashedBytes = hasher.ComputeHash(textWithSaltBytes);
             hasher.Clear();
             
@@ -51,9 +55,10 @@ namespace tkovdev.captcha.component.Models
         {
             if (Salt == null || Salt.Trim() == "") throw new NullReferenceException("Captcha.Salt cannot be null.");
             if (Secret == null || Secret.Trim() == "") throw new NullReferenceException("Captcha.Secret cannot be null.");
-            
+            if (TimeStamp == default) throw new NullReferenceException("Captcha.TimeStamp must be set.");
+
             SHA256CryptoServiceProvider hasher = new SHA256CryptoServiceProvider();
-            byte[] textWithSaltBytes = Encoding.UTF8.GetBytes(string.Concat(Secret, Salt));
+            byte[] textWithSaltBytes = Encoding.UTF8.GetBytes(string.Concat(Secret, Salt, TimeStamp.ToString("O")));
             byte[] hashedBytes = hasher.ComputeHash(textWithSaltBytes);
             hasher.Clear();
             
@@ -94,6 +99,10 @@ namespace tkovdev.captcha.component.Models
             string toValidateEncoded = captchaToValidate.DecodeSecret();
             if (toValidateEncoded == captchaToValidate.EncodedSecret)
             {
+                if (captchaToValidate.TimeStamp <= DateTime.Now)
+                {
+                    return ECaptchaValid.Timeout;
+                }
                 return ECaptchaValid.Valid;
             }
 

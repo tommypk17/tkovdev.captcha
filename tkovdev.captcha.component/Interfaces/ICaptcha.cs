@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using tkovdev.captcha.component.Enums;
 using tkovdev.captcha.component.Models;
 
@@ -10,6 +11,7 @@ namespace tkovdev.captcha.component.Interfaces
         public string EncodedSecret { get; set; }
         public byte[] Image { get; set; }
         public string Salt { get; set; }
+        public DateTime TimeStamp { get; set; }
 
         public string CreateSecret(int length);
         public string EncodeSecret();
